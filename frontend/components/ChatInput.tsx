@@ -37,28 +37,49 @@ export default function ChatInput({ onSend, isLoading }: ChatInputProps) {
     const canSend = value.trim().length > 0 && !isLoading;
 
     return (
-        <div className={`flex items-end gap-3 bg-white border rounded-2xl px-4 py-3 shadow-sm transition-all ${canSend ? "border-indigo-300 shadow-indigo-100" : "border-slate-200"
-            }`}>
-            <textarea
-                ref={textareaRef}
-                rows={1}
-                value={value}
-                onChange={handleChange}
-                onKeyDown={handleKeyDown}
-                disabled={isLoading}
-                placeholder="Message AI… (Enter to send, Shift+Enter for new line)"
-                className="flex-1 resize-none bg-transparent text-sm text-slate-800 placeholder-slate-400 focus:outline-none disabled:opacity-50 max-h-40 leading-relaxed"
-            />
-            <button
-                onClick={handleSend}
-                disabled={!canSend}
-                aria-label="Send message"
-                className="flex-shrink-0 w-9 h-9 rounded-xl bg-gradient-to-br from-violet-600 to-indigo-600 hover:from-violet-500 hover:to-indigo-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all shadow-sm flex items-center justify-center"
+        <div className="mx-auto w-full max-w-5xl">
+            <div
+                className={`chat-input flex items-end gap-3 rounded-[28px] border bg-white px-5 py-4 shadow-lg transition-all duration-200 ${canSend
+                        ? "border-indigo-300"
+                        : "border-slate-200"
+                    }`}
             >
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-4 h-4 text-white">
-                    <path d="M3.478 2.405a.75.75 0 0 0-.926.94l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.405Z" />
-                </svg>
-            </button>
+                {/* Textarea */}
+                <textarea
+                    ref={textareaRef}
+                    rows={2}
+                    value={value}
+                    onChange={handleChange}
+                    onKeyDown={handleKeyDown}
+                    disabled={isLoading}
+                    placeholder="Ask me anything..."
+                    className="flex-1 resize-none bg-transparent text-[15px] leading-7 text-slate-800 placeholder:text-slate-400 focus:outline-none disabled:opacity-50 max-h-40"
+                />
+
+                {/* Send Button */}
+                <button
+                    onClick={handleSend}
+                    disabled={!canSend}
+                    aria-label="Send message"
+                    className={`flex h-11 w-11 items-center justify-center rounded-full transition-all duration-200 ${canSend
+                            ? "bg-slate-900 text-white hover:bg-slate-800"
+                            : "bg-slate-200 text-slate-400"
+                        }`}
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                        className="h-5 w-5"
+                    >
+                        <path d="M3.478 2.405a.75.75 0 0 0-.926.94l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.405Z" />
+                    </svg>
+                </button>
+            </div>
+
+            <p className="mt-3 text-center text-xs text-slate-400">
+                AI can make mistakes. Verify important information.
+            </p>
         </div>
     );
 }

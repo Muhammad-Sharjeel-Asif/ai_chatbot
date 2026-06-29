@@ -1,50 +1,26 @@
+import React from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
-import type { Message } from "@/types/chat";
 
-interface MessageBubbleProps {
-    message: Message;
-}
+type Props = { role: "user" | "assistant"; content: string };
 
-function formatTime(date: Date) {
-    return date.toLocaleTimeString([], { hour: "2-digit", minute: "2-digit" });
-}
+export default function MessageBubble({ role, content }: Props) {
+  const isUser = role === "user";
+  const displayContent = content.trim() || " ";
 
-export default function MessageBubble({ message }: MessageBubbleProps) {
-    const isUser = message.role === "user";
-
-    return (
-        <div className={`flex items-end gap-2.5 message-enter ${isUser ? "flex-row-reverse" : "flex-row"}`}>
-            {/* Avatar */}
-            <div
-                className={`flex-shrink-0 w-8 h-8 rounded-full flex items-center justify-center text-white text-[11px] font-bold shadow-sm ${isUser
-                        ? "bg-gradient-to-br from-violet-500 to-indigo-600"
-                        : "bg-gradient-to-br from-indigo-500 to-blue-500"
-                    }`}
-            >
-                {isUser ? "You" : "AI"}
-            </div>
-
-            <div className={`flex flex-col gap-1 max-w-[78%] ${isUser ? "items-end" : "items-start"}`}>
-                {/* Bubble */}
-                <div
-                    className={`px-4 py-3 rounded-2xl text-sm leading-relaxed shadow-sm ${isUser
-                            ? "bg-gradient-to-br from-violet-600 to-indigo-600 text-white rounded-br-sm"
-                            : "bg-white border border-slate-200 text-slate-800 rounded-bl-sm"
-                        }`}
-                >
-                    <div className={`prose-chat ${isUser ? "prose-chat-user" : ""}`}>
-                        <ReactMarkdown remarkPlugins={[remarkGfm]}>
-                            {message.content}
-                        </ReactMarkdown>
-                    </div>
-                </div>
-
-                {/* Timestamp */}
-                <span className="text-[10px] text-slate-400 px-1">
-                    {formatTime(message.timestamp)}
-                </span>
-            </div>
+  return (
+    <div className={`flex w-full ${isUser ? "justify-end" : "justify-start"} mb-4`}>
+      <div className={`flex items-start gap-3 ${isUser ? "flex-row-reverse" : ""} max-w-3xl`}>
+        <div className={`h-8 w-8 shrink-0 rounded-full flex items-center justify-center text-xs font-bold text-white ${isUser ? "bg-indigo-600" : "bg-slate-900"}`}>
+          {isUser ? "You" : "AI"}
         </div>
-    );
+        <div className={`relative max-w-[80%] rounded-2xl px-5 py-3 shadow ${isUser ? "bg-slate-900 text-white" : "bg-slate-100 text-slate-800"}`}>
+          <div className={`absolute top-4 h-0 w-0 border-8 border-solid ${isUser ? "-right-2 border-l-slate-900 border-r-transparent border-t-transparent border-b-transparent" : "-left-2 border-r-slate-100 border-l-transparent border-t-transparent border-b-transparent"}`} />
+          <article className={isUser ? "prose-chat prose-chat-user" : "prose-chat"}>
+            <ReactMarkdown remarkPlugins={[remarkGfm]}>{displayContent}</ReactMarkdown>
+          </article>
+        </div>
+      </div>
+    </div>
+  );
 }
