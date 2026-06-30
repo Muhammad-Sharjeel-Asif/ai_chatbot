@@ -19,37 +19,32 @@ export default function ChatWindow({
     const bottomRef = useRef<HTMLDivElement>(null);
 
     useEffect(() => {
-        bottomRef.current?.scrollIntoView({
-            behavior: "smooth",
-        });
+        bottomRef.current?.scrollIntoView({ behavior: "smooth" });
     }, [messages, isLoading]);
 
     const isEmpty = messages.length === 0 && !isLoading;
 
     return (
-        <div className="flex-1 overflow-y-auto px-8 py-6">
+        <div className="flex-1 overflow-y-auto px-4 py-6 sm:px-8 lg:px-12">
             {isEmpty ? (
                 <div className="flex h-full items-center justify-center">
-                    <div className="w-full max-w-2xl px-6 text-center">
-                        {/* Small AI Logo */}
-                        {/* <div className="mx-auto mb-6 flex h-12 w-12 items-center justify-center rounded-full bg-slate-900 text-sm font-semibold text-white">
-                            AI
-                        </div> */}
+                    <div className="w-full max-w-xl px-6 text-center">
+                        <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-xl bg-[var(--color-ink)] font-mono text-base font-semibold text-[var(--color-accent)]">
+                            &gt;_
+                        </div>
 
-                        {/* Heading */}
-                        <h1 className="text-4xl font-bold tracking-tight text-slate-900">
+                        <h2 className="text-3xl font-bold tracking-tight text-[var(--color-ink)] sm:text-4xl">
                             How can I help you today?
-                        </h1>
+                        </h2>
 
-                        {/* Subtitle */}
-                        <p className="mt-4 text-lg text-slate-500">
+                        <p className="mt-4 text-base text-[var(--color-ink-soft)] sm:text-lg">
                             Ask questions, generate code, explain concepts, debug errors,
                             summarize documents, and much more.
                         </p>
                     </div>
                 </div>
             ) : (
-                <div className="mx-auto flex w-full max-w-5xl flex-col gap-5">
+                <div className="mx-auto flex w-full max-w-3xl flex-col gap-1 lg:max-w-5xl xl:max-w-6xl">
                     {messages.map((message) => (
                         <MessageBubble
                             key={message.id}
@@ -61,7 +56,7 @@ export default function ChatWindow({
                     {isLoading && <TypingIndicator />}
 
                     {error && (
-                        <div className="mx-auto flex w-full max-w-2xl items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
+                        <div className="message-enter mx-auto flex w-full items-start gap-3 rounded-xl border border-red-200 bg-red-50 px-4 py-3 text-sm text-red-700">
                             <svg
                                 xmlns="http://www.w3.org/2000/svg"
                                 viewBox="0 0 24 24"
@@ -74,7 +69,6 @@ export default function ChatWindow({
                                     clipRule="evenodd"
                                 />
                             </svg>
-
                             <span>{error}</span>
                         </div>
                     )}

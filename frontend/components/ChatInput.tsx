@@ -37,23 +37,21 @@ export default function ChatInput({ onSend, isLoading }: ChatInputProps) {
     const canSend = value.trim().length > 0 && !isLoading;
 
     return (
-        <div className="mx-auto w-full max-w-5xl">
+        <div className="mx-auto w-full">
             <div
-                className={`chat-input flex items-end gap-3 rounded-[28px] border bg-white px-5 py-4 shadow-lg transition-all duration-200 ${canSend
-                        ? "border-indigo-300"
-                        : "border-slate-200"
+                className={`chat-input flex items-center gap-2 rounded-2xl border bg-[var(--color-surface)] py-2.5 pl-4 pr-2 shadow-sm transition-colors duration-150 sm:gap-3 sm:py-3 sm:pl-5 sm:pr-2.5 ${canSend ? "border-[var(--color-accent)]" : "border-[var(--color-border)]"
                     }`}
             >
                 {/* Textarea */}
                 <textarea
                     ref={textareaRef}
-                    rows={2}
+                    rows={1}
                     value={value}
                     onChange={handleChange}
                     onKeyDown={handleKeyDown}
                     disabled={isLoading}
                     placeholder="Ask me anything..."
-                    className="flex-1 resize-none bg-transparent text-[15px] leading-7 text-slate-800 placeholder:text-slate-400 focus:outline-none disabled:opacity-50 max-h-40"
+                    className="max-h-40 flex-1 resize-none bg-transparent text-[15px] leading-6 text-[var(--color-ink)] placeholder:text-[var(--color-ink-faint)] focus:outline-none disabled:opacity-50"
                 />
 
                 {/* Send Button */}
@@ -61,23 +59,23 @@ export default function ChatInput({ onSend, isLoading }: ChatInputProps) {
                     onClick={handleSend}
                     disabled={!canSend}
                     aria-label="Send message"
-                    className={`flex h-11 w-11 items-center justify-center rounded-full transition-all duration-200 ${canSend
-                            ? "bg-slate-900 text-white hover:bg-slate-800"
-                            : "bg-slate-200 text-slate-400"
+                    className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full transition-colors duration-150 sm:h-10 sm:w-10 ${canSend
+                            ? "bg-[var(--color-accent)] text-white hover:bg-[var(--color-accent-hover)]"
+                            : "bg-[var(--color-paper)] text-[var(--color-ink-faint)]"
                         }`}
                 >
                     <svg
                         xmlns="http://www.w3.org/2000/svg"
                         viewBox="0 0 24 24"
                         fill="currentColor"
-                        className="h-5 w-5"
+                        className="h-[18px] w-[18px]"
                     >
                         <path d="M3.478 2.405a.75.75 0 0 0-.926.94l2.432 7.905H13.5a.75.75 0 0 1 0 1.5H4.984l-2.432 7.905a.75.75 0 0 0 .926.94 60.519 60.519 0 0 0 18.445-8.986.75.75 0 0 0 0-1.218A60.517 60.517 0 0 0 3.478 2.405Z" />
                     </svg>
                 </button>
             </div>
 
-            <p className="mt-3 text-center text-xs text-slate-400">
+            <p className="mt-2.5 text-center text-xs text-[var(--color-ink-faint)]">
                 AI can make mistakes. Verify important information.
             </p>
         </div>

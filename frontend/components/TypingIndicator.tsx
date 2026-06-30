@@ -1,10 +1,10 @@
 export default function TypingIndicator() {
     return (
-        <div className="flex items-end gap-2.5 message-enter">
-            <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-br from-indigo-500 to-blue-500 flex items-center justify-center text-white text-[11px] font-bold shadow-sm">
-                AI
+        <div className="message-enter flex w-full items-start gap-3 py-2.5">
+            <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-[var(--color-ink)] font-mono text-[10px] font-bold text-[var(--color-accent)]">
+                &gt;_
             </div>
-            <div className="bg-white border border-slate-200 rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm flex items-center gap-1.5">
+            <div className="flex items-center gap-1.5 rounded-2xl rounded-tl-sm border border-[var(--color-border)] bg-[var(--color-surface)] px-4 py-3.5 shadow-sm">
                 <span className="typing-dot" />
                 <span className="typing-dot" />
                 <span className="typing-dot" />

@@ -10,24 +10,22 @@ export default function Home() {
 
     return (
         <main className="min-h-screen bg-grid">
-            <div className="mx-auto flex h-screen max-w-6xl flex-col px-5 py-6">
+            <div className="mx-auto flex h-screen max-w-5xl flex-col px-4 py-5 sm:px-6 sm:py-6 lg:max-w-6xl lg:px-8 xl:max-w-7xl 2xl:max-w-[88rem]">
                 {/* Header */}
-                <header className="mb-5 flex items-center justify-between rounded-2xl border border-slate-200/80 bg-white/80 px-6 py-4 backdrop-blur-sm">
-                    <div className="flex items-center gap-4">
-                        {/* <div className="flex h-10 w-10 items-center justify-center rounded-full bg-slate-900 text-sm font-semibold text-white">
-                            AI
-                        </div> */}
+                <header className="mb-4 flex items-center justify-between rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)]/90 px-5 py-3.5 backdrop-blur-sm sm:px-6">
+                    <div className="flex items-center gap-3">
+                        <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg bg-[var(--color-ink)] font-mono text-sm font-semibold text-[var(--color-accent)]">
+                            &gt;_
+                        </div>
 
-                        <div className="w-full max-w-2xl px-6 text-center">
-                            <h1 className="text-lg font-semibold tracking-tight text-slate-900 text-center
-">
+                        <div>
+                            <h1 className="text-[15px] font-semibold leading-tight tracking-tight text-[var(--color-ink)]">
                                 AI Assistant
                             </h1>
-
-                            {/* <div className="mt-1 flex items-center gap-2 text-sm text-slate-500">
-                                <span className="h-2 w-2 rounded-full bg-emerald-500"></span>
+                            <div className="mt-0.5 flex items-center gap-1.5 text-xs text-[var(--color-ink-soft)]">
+                                <span className="h-1.5 w-1.5 rounded-full bg-emerald-500" />
                                 Powered by Groq
-                            </div> */}
+                            </div>
                         </div>
                     </div>
 
@@ -38,7 +36,7 @@ export default function Home() {
                 </header>
 
                 {/* Chat */}
-                <section className="flex min-h-0 flex-1 flex-col overflow-hidden bg-transparent">
+                <section className="flex min-h-0 flex-1 flex-col overflow-hidden rounded-2xl border border-[var(--color-border)] bg-[var(--color-surface)]/60">
                     <ChatWindow
                         messages={messages}
                         isLoading={isLoading}
@@ -47,15 +45,8 @@ export default function Home() {
                 </section>
 
                 {/* Input */}
-                <footer className="mt-5">
-                    <ChatInput
-                        onSend={sendMessage}
-                        isLoading={isLoading}
-                    />
-
-                    <p className="mt-3 text-center text-xs text-slate-400">
-                        AI may generate incorrect information. Verify important responses.
-                    </p>
+                <footer className="mt-4">
+                    <ChatInput onSend={sendMessage} isLoading={isLoading} />
                 </footer>
             </div>
         </main>
